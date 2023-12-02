@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from core import APP_CONFIGS
 from mangum import Mangum
+from core import APP_ENV, APP_CONFIGS
 
 app = FastAPI(**APP_CONFIGS)
 handler = Mangum(app)
@@ -8,4 +8,4 @@ handler = Mangum(app)
 
 @app.get("/")
 def read_root():
-    return {"message": "Life Deployed Successfully!"}
+    return {"message": f"Life Deployed Successfully! on {APP_ENV}"}

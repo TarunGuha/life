@@ -18,3 +18,5 @@ if APP_ENV in SHOW_DOCS_ENVIRONMENT:
     }
 else:
     APP_CONFIGS = {}
+
+AUTH_KEY = os.environ.get("AUTH_KEY", "dev")

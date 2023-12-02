@@ -1,1 +1,1 @@
-from .config import APP_CONFIGS
+from .config import APP_CONFIGS, APP_ENV
