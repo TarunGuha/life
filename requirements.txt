@@ -3,6 +3,7 @@ pydantic
 uvicorn
 mangum
 python-dotenv
+selenium
 requests
 pyclean
 pytest

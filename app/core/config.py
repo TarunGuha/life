@@ -20,3 +20,10 @@ else:
     APP_CONFIGS = {}
 
 AUTH_KEY = os.environ.get("AUTH_KEY", "dev")
+
+CLEAN_USER = os.environ.get("CLEAN_USER", "")
+CLEAN_PASS = os.environ.get("CLEAN_PASS", "")
+LOGIN_PAGE = os.environ.get("LOGIN_PAGE", "")
+HOME_PAGE = os.environ.get("HOME_PAGE", "")
+
+SELENIUM_URL = os.getenv("SELENIUM_URL", "http://localhost:4444")
