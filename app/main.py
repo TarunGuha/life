@@ -1,9 +1,12 @@
 from fastapi import FastAPI
-from mangum import Mangum
-from core import APP_ENV, APP_CONFIGS
+from core import APP_ENV, APP_CONFIGS, SHOW_DOCS_ENVIRONMENT
 
 app = FastAPI(**APP_CONFIGS)
-handler = Mangum(app)
+
+if APP_ENV not in SHOW_DOCS_ENVIRONMENT:
+    from mangum import Mangum
+
+    handler = Mangum(app)
 
 
 @app.get("/")
