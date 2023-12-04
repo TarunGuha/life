@@ -25,11 +25,11 @@ class Followers(enum.Enum):
     CONFIRM = "/html/body/div[{}]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[3]/button[1]"
 
 
-async def start_cleanup():
+def start_cleanup():
+    start_time = time.time()
     try:
         driver = initialize_remote_client(undetected=False)
-        logging.warning("Starting Login Flow")
-        driver = await login_user(driver)
+        driver = login_user(driver)
         driver = start_removal(driver)
         driver = logout_user(driver)
         driver.quit()
@@ -41,10 +41,11 @@ async def start_cleanup():
             driver.quit()
         except:
             pass
-    return True
+    end_time = time.time()
+    return end_time - start_time
 
 
-async def login_user(driver):
+def login_user(driver):
     logging.warning("Login -> Opening Login Page")
     driver.get(LOGIN_PAGE)
 
@@ -115,7 +116,7 @@ def start_removal(driver):
 def logout_user(driver):
     logging.warning("Logout -> Starting Logout")
     driver.get(HOME_PAGE)
-    time.sleep(5)
+    time.sleep(10)
 
     while True:
         divname = div_name_finder(driver.page_source)
@@ -125,7 +126,7 @@ def logout_user(driver):
     logging.warning("Logout -> Logout Options")
     options = element_finder(driver, Logout.OPTIONS.value.format(divname))
     options.click()
-    time.sleep(5)
+    time.sleep(10)
 
     logging.warning("Logout -> Logging Out")
     logout = driver.find_element(By.XPATH, Logout.LOGOUT.value.format(divname))

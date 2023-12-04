@@ -16,5 +16,5 @@ def read_root():
 
 
 @app.post("/clean")
-async def call_start_cleanup():
-    return await start_cleanup()
+def call_start_cleanup():
+    return start_cleanup()
