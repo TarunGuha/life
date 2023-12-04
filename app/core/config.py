@@ -26,4 +26,7 @@ CLEAN_PASS = os.environ.get("CLEAN_PASS", "")
 LOGIN_PAGE = os.environ.get("LOGIN_PAGE", "")
 HOME_PAGE = os.environ.get("HOME_PAGE", "")
 
+API_KEY = os.environ.get("API_KEY", "")
+USER_ID = os.environ.get("USER_ID", "")
+
 SELENIUM_URL = os.getenv("SELENIUM_URL", "http://localhost:4444")

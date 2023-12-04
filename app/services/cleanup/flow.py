@@ -1,11 +1,12 @@
 import time
 import enum
 import logging
+import requests
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from utils.selenium_webdriver.wedriver import element_finder, initialize_remote_client
-from core.config import CLEAN_USER, CLEAN_PASS, LOGIN_PAGE, HOME_PAGE
+from core.config import CLEAN_USER, CLEAN_PASS, LOGIN_PAGE, HOME_PAGE, API_KEY, USER_ID
 
 
 class Login(enum.Enum):
@@ -32,12 +33,15 @@ async def start_cleanup():
         driver = start_removal(driver)
         driver = logout_user(driver)
         driver.quit()
+        send_success_message()
     except:
         logging.warning("Flow -> Error Encountered")
+        send_failed_message()
         try:
             driver.quit()
         except:
             pass
+    return True
 
 
 async def login_user(driver):
@@ -130,3 +134,41 @@ def logout_user(driver):
     logging.warning("Logout -> Closing Driver")
 
     return driver
+
+
+def get_instagram_followers(user_handle):
+    response = requests.get(
+        "https://www.instagram.com/{user_handle}/".format(user_handle=user_handle)
+    )
+    soup = BeautifulSoup(response.text)
+    meta_tag = soup.find("meta", property="og:description")
+    content = meta_tag.get("content")
+    followers = content.split(" ")[0]
+    return int(followers.replace(",", ""))
+
+
+def send_success_message():
+    payload = {
+        "chat_id": int(USER_ID),
+        "text": "Run Successful\nCurrent Count = {count}".format(
+            count=get_instagram_followers(HOME_PAGE[26:47])
+        ),
+    }
+    requests.post(
+        "https://api.telegram.org/bot{telegram_bot_token}/sendMessage".format(
+            telegram_bot_token=API_KEY
+        ),
+        json=payload,
+    )
+    return True
+
+
+def send_failed_message():
+    payload = {"chat_id": int(USER_ID), "text": "Run Failed"}
+    requests.post(
+        "https://api.telegram.org/bot{telegram_bot_token}/sendMessage".format(
+            telegram_bot_token=API_KEY
+        ),
+        json=payload,
+    )
+    return True
