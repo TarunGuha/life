@@ -57,6 +57,7 @@ def login_user(driver):
     password = element_finder(driver, Login.PASSWORD.value)
     password.send_keys(CLEAN_PASS)
     password.send_keys(Keys.ENTER)
+    logging.warning("Login -> Logging In")
 
     time.sleep(20)
     driver.get(HOME_PAGE)
@@ -81,14 +82,17 @@ def div_name_finder(html):
 
 
 def start_removal(driver):
+    logging.warning("Removal -> Finding Page Source")
     while True:
         divname = div_name_finder(driver.page_source)
         if bool(divname):
             break
 
+    logging.warning("Removal -> Checking Followers")
     followers = element_finder(driver, Followers.FOLLOWERS.value.format(divname), 60)
     followers.click()
 
+    logging.warning("Removal -> Removal Loop")
     try:
         for index in range(1, 11, 1):
             unfollow = element_finder(
@@ -98,6 +102,7 @@ def start_removal(driver):
             confirm = element_finder(driver, Followers.CONFIRM.value.format(6))
             confirm.click()
     except:
+        logging.warning("Removal -> Failed Once")
         try:
             for index in range(1, 11, 1):
                 unfollow = element_finder(
@@ -107,9 +112,12 @@ def start_removal(driver):
                 confirm = element_finder(driver, Followers.CONFIRM.value.format(7))
                 confirm.click()
         except:
+            logging.warning("Removal -> Failed Twice")
             pass
 
+    logging.warning("Removal -> Removal Finished Waiting For 10 Seconds")
     time.sleep(10)
+    logging.warning("Removal -> Wait Complete")
     return driver
 
 

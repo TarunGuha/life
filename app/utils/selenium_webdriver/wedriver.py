@@ -17,7 +17,7 @@ def initialize_remote_client(undetected=False):
     logging.warning("Driver -> Initializing The Remote Driver")
     cloud_options = {
         "browser": "Chrome",
-        "browser_version": "119.0",
+        "browser_version": "117.0",
         "os": "Linux",
         "browserstack.local": True,
         "browserstack.debug": True,
