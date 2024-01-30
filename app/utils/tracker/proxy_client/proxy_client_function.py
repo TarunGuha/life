@@ -10,7 +10,7 @@ def main(args):
         request_parameters = args.get("request_parameters")
 
         http_request_response = requests.request(
-            method=request_parameters.get("request_type"),
+            method=request_parameters.get("request_method"),
             url=request_parameters.get("request_url"),
             params=request_parameters.get("request_params"),
             data=request_parameters.get("request_data"),

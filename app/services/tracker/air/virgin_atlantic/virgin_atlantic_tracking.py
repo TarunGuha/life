@@ -1,19 +1,20 @@
 import logging
-from client.proxy.proxy_client import call_proxy_client
+from .get_virgin_atlantic_token import call_get_virgin_atlantic_token
+from .get_virgin_atlantic_raw_data import call_get_virgin_atlantic_raw_data
+from .get_virgin_atlantic_booking_reference_number import (
+    call_get_virgin_atlantic_booking_reference_number,
+)
 
 
 def track_virgin_atlantic_awb(request):
-    specifications = {
-        "request_parameters": {
-            "request_type": "GET",
-            "request_url": "https://api.ipify.org?format=json",
-            "request_params": {},
-            "request_data": {},
-            "request_json": {"hello": "ok"},
-        }
-    }
+    bearer_token = call_get_virgin_atlantic_token()
 
-    proxy_client_call = call_proxy_client(request_specifications=specifications)
-    proxy_client_response = proxy_client_call.json()
+    booking_reference_number = call_get_virgin_atlantic_booking_reference_number(
+        request=request, bearer_token=bearer_token
+    )
 
-    return {"payload": {"response": proxy_client_response}, "status": 200}
+    raw_tracking_data = call_get_virgin_atlantic_raw_data(
+        bearer_token=bearer_token, booking_reference_number=booking_reference_number
+    )
+
+    return {"payload": raw_tracking_data, "status": 200}

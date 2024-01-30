@@ -22,3 +22,29 @@ def call_proxy_client(request_specifications):
     )
 
     return response
+
+
+def proxy_request(
+    request_method,
+    request_url,
+    request_params={},
+    request_data={},
+    request_json={},
+    request_headers={},
+    request_cookies={},
+):
+    specifications = {
+        "request_parameters": {
+            "request_method": request_method,
+            "request_url": request_url,
+            "request_params": request_params,
+            "request_data": request_data,
+            "request_json": request_json,
+            "request_headers": request_headers,
+            "request_cookies": request_cookies,
+        }
+    }
+
+    proxy_client_call = call_proxy_client(request_specifications=specifications)
+    proxy_client_response = proxy_client_call.json()
+    return proxy_client_response
