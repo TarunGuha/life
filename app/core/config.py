@@ -20,3 +20,6 @@ else:
     APP_CONFIGS = {}
 
 AUTH_KEY = os.environ.get("AUTH_KEY", "dev")
+
+DIGITAL_OCEAN_FUNCTION_URI = os.environ.get("DIGITAL_OCEAN_FUNCTION_URI", "")
+DIGITAL_OCEAN_AUTH_KEY = os.environ.get("DIGITAL_OCEAN_AUTH_KEY", "")

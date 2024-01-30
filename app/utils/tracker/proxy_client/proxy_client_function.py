@@ -1,9 +1,11 @@
-import json
 import logging
 import requests
+from datetime import datetime
 
 
 def main(args):
+    function_start_time = datetime.utcnow()
+
     try:
         request_parameters = args.get("request_parameters")
 
@@ -20,7 +22,7 @@ def main(args):
         response = {
             "response_cookies": http_request_response.cookies.get_dict(),
             "response_encoding": http_request_response.encoding,
-            "response_headers": json.dumps(dict(http_request_response.headers)),
+            "response_headers": dict(http_request_response.headers),
             "response_status_code": http_request_response.status_code,
             "response_text": http_request_response.text,
         }
@@ -44,6 +46,11 @@ def main(args):
         )
         response = {"response_error": str(e)}
 
-    function_response = {"body": {"response": response}}
+    function_response = {
+        "body": {
+            "response": response,
+            "runtime": (datetime.utcnow() - function_start_time).total_seconds(),
+        }
+    }
 
     return function_response
