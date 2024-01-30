@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from core import APP_ENV, APP_CONFIGS, SHOW_DOCS_ENVIRONMENT
+from api.endpoints.main_router import router as main_router
 
 app = FastAPI(**APP_CONFIGS)
 
@@ -8,7 +9,4 @@ if APP_ENV not in SHOW_DOCS_ENVIRONMENT:
 
     handler = Mangum(app)
 
-
-@app.get("/")
-def read_root():
-    return {"message": f"Life Deployed Successfully! on {APP_ENV}"}
+app.include_router(main_router)
