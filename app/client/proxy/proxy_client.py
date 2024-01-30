@@ -10,15 +10,15 @@ def call_proxy_client(request_specifications):
     }
 
     params = {
-        "blocking": "true",
-        "result": "true",
+        "blocking": True,
+        "result": True,
     }
 
     response = requests.post(
-        DIGITAL_OCEAN_FUNCTION_URI + str(random.randint(1, 2)),
+        url=DIGITAL_OCEAN_FUNCTION_URI + str(random.randint(1, 2)),
         params=params,
         headers=headers,
-        data=request_specifications,
+        json=request_specifications,
     )
 
     return response
