@@ -1,1 +1,1 @@
-from .proxy_client import call_proxy_client
+from .proxy_client import proxy_request

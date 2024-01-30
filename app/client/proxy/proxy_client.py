@@ -1,4 +1,5 @@
 import random
+import logging
 import requests
 from core.config import DIGITAL_OCEAN_FUNCTION_URI, DIGITAL_OCEAN_AUTH_KEY
 
@@ -14,8 +15,13 @@ def call_proxy_client(request_specifications):
         "result": True,
     }
 
+    function_id = str(random.randint(1, 2))
+    logging.info(
+        "Proxy => Invoking Function ID -> {function_id}".format(function_id=function_id)
+    )
+
     response = requests.post(
-        url=DIGITAL_OCEAN_FUNCTION_URI + str(random.randint(1, 2)),
+        url=DIGITAL_OCEAN_FUNCTION_URI + function_id,
         params=params,
         headers=headers,
         json=request_specifications,
