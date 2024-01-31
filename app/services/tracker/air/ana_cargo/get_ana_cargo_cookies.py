@@ -1,4 +1,4 @@
-from client.proxy import proxy_request
+from client.proxy import ProxyRequest
 
 
 def call_get_ana_cargo_cookies():
@@ -17,7 +17,7 @@ def call_get_ana_cargo_cookies():
         "sec-ch-ua-platform": '"macOS"',
     }
 
-    homepage_proxy_call = proxy_request(
+    homepage_proxy_call = ProxyRequest().request(
         request_method="POST",
         request_url="https://prd.intcgo.ana.co.jp/portalgateway/rest/orgv",
         request_headers=headers,

@@ -1,4 +1,4 @@
-from client.proxy.proxy_client import proxy_request
+from client.proxy.proxy_client import ProxyRequest
 
 
 def call_get_virgin_atlantic_token():
@@ -25,7 +25,7 @@ def call_get_virgin_atlantic_token():
         "grant_type": "password",
     }
 
-    response = proxy_request(
+    response = ProxyRequest().request(
         request_url="https://myvs.virginatlanticcargo.com/api/iam/oauth/token",
         request_method="POST",
         request_headers=headers,

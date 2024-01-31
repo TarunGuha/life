@@ -1,4 +1,4 @@
-from client.proxy import proxy_request
+from client.proxy import ProxyRequest
 
 
 def call_get_ana_cargo_bearer_token(cookies):
@@ -24,7 +24,7 @@ def call_get_ana_cargo_bearer_token(cookies):
         "query": "mutation loginAsAnonymousUser {\n  loginAsAnonymousUser {\n    security {\n      id_token\n      exp\n      __typename\n    }\n    loginProfile {\n      company_code\n      airport_code\n      default_warehouse_code\n      own_airline_code\n      own_airline_identifier\n      own_airline_numeric_code\n      station_code\n      first_name\n      last_name\n      screens\n      agent_code\n      language\n      user_timezone\n      portal_user_type\n      user_id\n      role_group_code\n      airline_mapping\n      email_address\n      __typename\n    }\n    errors {\n      error_description\n      error_code\n      error_type\n      __typename\n    }\n    __typename\n  }\n}\n",
     }
 
-    track_page_proxy_call = proxy_request(
+    track_page_proxy_call = ProxyRequest().request(
         request_method="POST",
         request_url="https://prd.intcgo.ana.co.jp/portalgateway/graphql",
         request_cookies=cookies,

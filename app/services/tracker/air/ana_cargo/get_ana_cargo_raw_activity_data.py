@@ -1,4 +1,4 @@
-from client.proxy import proxy_request
+from client.proxy import ProxyRequest
 
 
 def call_get_ana_cargo_raw_activity_data(cookies, bearer_token, request):
@@ -29,7 +29,7 @@ def call_get_ana_cargo_raw_activity_data(cookies, bearer_token, request):
         "query": "query GetShipmentActivityByAwb($shipmentNumber: String!) {\n  GetShipmentActivityByAwb(shipmentNumber: $shipmentNumber) {\n    items {\n      event\n      pieces\n      reason\n      airport_code\n      event_time\n      weight\n      weight_unit\n      from_carrier\n      to_carrier\n      uld_number\n      arrival_time\n      departure_time\n      flight {\n        flight_carrier_code\n        flight_number\n        flight_date\n        origin\n        destination\n        __typename\n      }\n      __typename\n    }\n    filters {\n      statuses\n      flights\n      stations\n      __typename\n    }\n    __typename\n  }\n}\n",
     }
 
-    response = proxy_request(
+    response = ProxyRequest().request(
         request_method="POST",
         request_url="https://prd.intcgo.ana.co.jp/portalgateway/graphql",
         request_cookies=cookies,

@@ -1,4 +1,4 @@
-from client.proxy.proxy_client import proxy_request
+from client.proxy.proxy_client import ProxyRequest
 
 
 def call_get_virgin_atlantic_booking_reference_number(request, bearer_token):
@@ -38,7 +38,7 @@ def call_get_virgin_atlantic_booking_reference_number(request, bearer_token):
         },
     }
 
-    booking_list = proxy_request(
+    booking_list = ProxyRequest().request(
         request_method="POST",
         request_url="https://myvs.virginatlanticcargo.com/api/order/services/cargo/v1/orders/actions/search",
         request_params=params,

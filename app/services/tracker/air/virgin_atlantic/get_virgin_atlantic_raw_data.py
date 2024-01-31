@@ -1,4 +1,4 @@
-from client.proxy.proxy_client import proxy_request
+from client.proxy.proxy_client import ProxyRequest
 
 
 def call_get_virgin_atlantic_raw_data(bearer_token, booking_reference_number):
@@ -18,7 +18,7 @@ def call_get_virgin_atlantic_raw_data(bearer_token, booking_reference_number):
         "sec-ch-ua-platform": '"macOS"',
     }
 
-    raw_tracking_data = proxy_request(
+    raw_tracking_data = ProxyRequest().request(
         request_method="GET",
         request_url="https://myvs.virginatlanticcargo.com/api/order/services/cargo/v1/orders/b"
         + booking_reference_number,
