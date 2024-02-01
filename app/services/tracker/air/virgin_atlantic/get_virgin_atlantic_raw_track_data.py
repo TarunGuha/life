@@ -1,7 +1,7 @@
 from client.proxy.proxy_client import ProxyRequest
 
 
-def call_get_virgin_atlantic_raw_data(bearer_token, booking_reference_number):
+def call_get_virgin_atlantic_raw_track_data(bearer_token, booking_reference_number):
     headers = {
         "Accept": "application/json, text/plain, */*",
         "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",

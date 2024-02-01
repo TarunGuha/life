@@ -1,6 +1,6 @@
 import logging
 from .get_virgin_atlantic_token import call_get_virgin_atlantic_token
-from .get_virgin_atlantic_raw_data import call_get_virgin_atlantic_raw_data
+from .get_virgin_atlantic_raw_track_data import call_get_virgin_atlantic_raw_track_data
 from .get_virgin_atlantic_booking_reference_number import (
     call_get_virgin_atlantic_booking_reference_number,
 )
@@ -13,7 +13,7 @@ def track_virgin_atlantic_awb(request):
         request=request, bearer_token=bearer_token
     )
 
-    raw_tracking_data = call_get_virgin_atlantic_raw_data(
+    raw_tracking_data = call_get_virgin_atlantic_raw_track_data(
         bearer_token=bearer_token, booking_reference_number=booking_reference_number
     )
 
